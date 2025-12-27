@@ -1,88 +1,61 @@
 <div align="center">
-   ┌───────────────────────────┐
-   │        RAG ANALYZER        │
-   │   Transparent White-Box   │
-   └───────────────────────────┘
-Local • Explainable • SQL-Driven
+<pre>
+┌───────────────────────────┐
+│        RAG ANALYZER        │
+│   Transparent White-Box    │
+└───────────────────────────┘
+</pre>
+<p><strong>Local • Explainable • SQL-Driven</strong></p>
+</div>
 
+<hr>
 
-## Overview
+<h2>Overview</h2>
+<p>This project implements a <strong>White-Box Retrieval-Augmented Generation (RAG)</strong> system designed to analyze <strong>call center dialogue transcripts</strong>.</p>
+<p>Unlike black-box solutions, every stage of the pipeline is <strong>explicit, auditable, and locally executed</strong>, from data ingestion to SQL-based semantic retrieval and answer generation.</p>
+<p>The assistant answers questions <strong>strictly based on the transcripts</strong>, always returning the <strong>exact source segments</strong> used.</p>
 
-This project implements a **White-Box Retrieval-Augmented Generation (RAG)** system designed to analyze **call center dialogue transcripts**.
+<hr>
 
-Unlike black-box solutions, every stage of the pipeline is **explicit, auditable, and locally executed**, from data ingestion to SQL-based semantic retrieval and answer generation.
+<h2>Key Features</h2>
+<ul>
+<li>Fully transparent White-box RAG pipeline</li>
+<li>Local execution (no cloud, no data leakage)</li>
+<li>SQL-based semantic search using <code>pgvector</code></li>
+<li>Evidence-backed answers (anti-hallucination)</li>
+<li>Streamlit UI with source inspection</li>
+</ul>
 
-The assistant answers questions **only using facts present in the transcripts**, always returning the **exact source segments** used.
+<hr>
 
----
+<h2>Tech Stack</h2>
+<ul>
+<li><strong>Python 3.11+</strong></li>
+<li><strong>PostgreSQL 16 + pgvector</strong></li>
+<li><strong>SQLAlchemy 2.0</strong></li>
+<li><strong>SentenceTransformers (MiniLM)</strong></li>
+<li><strong>Llama 3.1 (8B) via Ollama</strong></li>
+<li><strong>Streamlit</strong></li>
+</ul>
 
-## Key Features
+<hr>
 
-- White-box RAG pipeline (fully transparent)
-- Local execution (no cloud, no data leakage)
-- SQL-based semantic search using `pgvector`
-- Evidence-backed answers (anti-hallucination)
-- Streamlit UI with source inspection
-
----
-
-## Tech Stack
-
-- **Python 3.11+**
-- **PostgreSQL 16 + pgvector**
-- **SQLAlchemy 2.0**
-- **SentenceTransformers (MiniLM)**
-- **Llama 3.1 (8B) via Ollama**
-- **Streamlit**
-
----
-
-## Project Structure
-
-```plaintext
+<h2>Project Structure</h2>
+<pre>
 ai-expert-bot/
 ├── data/            # Raw call transcripts (.txt)
 ├── backend/         # White-box RAG logic
 ├── ui.py            # Streamlit interface
 ├── requirements.txt
 └── README.md
-## How It Works
+</pre>
 
-1-User asks a question
+<hr>
 
-2-Question is embedded (384D)
-
-3-SQL semantic search via pgvector
-
-4-Top matching transcript chunks retrieved
-
-5-LLM generates an answer only from retrieved sources
-
-## Example SQL retrieval:
-SELECT content
-FROM documents
-ORDER BY embedding <=> query_vector
-LIMIT 5;
-##setup
-python -m backend.setup_db
-
-python -m backend.ingest_data
-
-streamlit run ui.py
-## use cases 
-Call center quality audits
-
-Agent training and coaching
-
-Procedure and FAQ extraction
-
-Compliance and script verification
-##Design Principles
-
-Transparency over abstraction
-
-SQL over hidden retrieval layers
-
-Local models over cloud APIs
-
-Evidence over speculation  
+<h2>How It Works</h2>
+<ol>
+<li><strong>User asks a question</strong></li>
+<li><strong>Question is embedded</strong> into a 384-dimensional vector</li>
+<li><strong>SQL semantic search</strong> via <code>pgvector</code></li>
+<li><strong>Top matching transcript chunks</strong> are retrieved</li>
+<li><strong>LLM gener
