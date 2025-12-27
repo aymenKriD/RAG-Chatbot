@@ -58,4 +58,55 @@ ai-expert-bot/
 <li><strong>Question is embedded</strong> into a 384-dimensional vector</li>
 <li><strong>SQL semantic search</strong> via <code>pgvector</code></li>
 <li><strong>Top matching transcript chunks</strong> are retrieved</li>
-<li><strong>LLM gener
+<li><strong>LLM generates an answer</strong> only from retrieved sources</li>
+</ol>
+
+<p>Example SQL query:</p>
+<pre><code>SELECT content
+FROM documents
+ORDER BY embedding &lt;=&gt; query_vector
+LIMIT 5;
+</code></pre>
+
+<hr>
+
+<h2>Setup</h2>
+<p>Follow these steps to set up and run the project locally:</p>
+
+<h3>1. Install Python Dependencies</h3>
+<pre><code>pip install -r requirements.txt
+</code></pre>
+
+<h3>2. Initialize PostgreSQL Database</h3>
+<pre><code>python -m backend.setup_db
+</code></pre>
+
+<h3>3. Ingest & Index Data</h3>
+<pre><code>python -m backend.ingest_data
+</code></pre>
+
+<h3>4. Run the Streamlit Interface</h3>
+<pre><code>streamlit run ui.py
+</code></pre>
+
+<p>After completing these steps, the assistant will be ready to answer questions based on your uploaded transcripts.</p>
+
+<hr>
+
+<h2>Use Cases</h2>
+<ul>
+<li>Call center quality audits</li>
+<li>Agent training and coaching</li>
+<li>Procedure and FAQ extraction</li>
+<li>Compliance and script verification</li>
+</ul>
+
+<hr>
+
+<h2>Design Principles</h2>
+<ul>
+<li><strong>Transparency over abstraction</strong></li>
+<li><strong>SQL over hidden retrieval layers</strong></li>
+<li><strong>Local models over cloud APIs</strong></li>
+<li><strong>Evidence over speculation</strong></li>
+</ul>
