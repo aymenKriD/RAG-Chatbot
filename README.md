@@ -4,9 +4,7 @@
    │   Transparent White-Box   │
    └───────────────────────────┘
 Local • Explainable • SQL-Driven
-</div>
 
----
 
 ## Overview
 
@@ -48,7 +46,7 @@ ai-expert-bot/
 ├── ui.py            # Streamlit interface
 ├── requirements.txt
 └── README.md
-How It Works
+## How It Works
 
 1-User asks a question
 
@@ -60,7 +58,7 @@ How It Works
 
 5-LLM generates an answer only from retrieved sources
 
-Example SQL retrieval:
+## Example SQL retrieval:
 SELECT content
 FROM documents
 ORDER BY embedding <=> query_vector
@@ -71,7 +69,7 @@ python -m backend.setup_db
 python -m backend.ingest_data
 
 streamlit run ui.py
-##use cases 
+## use cases 
 Call center quality audits
 
 Agent training and coaching
@@ -79,7 +77,7 @@ Agent training and coaching
 Procedure and FAQ extraction
 
 Compliance and script verification
-Design Principles
+##Design Principles
 
 Transparency over abstraction
 
