@@ -1,0 +1,112 @@
+<div align="center">
+<pre>
+┌───────────────────────────┐
+│        RAG ANALYZER        │
+│   Transparent White-Box    │
+└───────────────────────────┘
+</pre>
+<p><strong>Local • Explainable • SQL-Driven</strong></p>
+</div>
+
+<hr>
+
+<h2>Overview</h2>
+<p>This project implements a <strong>White-Box Retrieval-Augmented Generation (RAG)</strong> system designed to analyze <strong>call center dialogue transcripts</strong>.</p>
+<p>Unlike black-box solutions, every stage of the pipeline is <strong>explicit, auditable, and locally executed</strong>, from data ingestion to SQL-based semantic retrieval and answer generation.</p>
+<p>The assistant answers questions <strong>strictly based on the transcripts</strong>, always returning the <strong>exact source segments</strong> used.</p>
+
+<hr>
+
+<h2>Key Features</h2>
+<ul>
+<li>Fully transparent White-box RAG pipeline</li>
+<li>Local execution (no cloud, no data leakage)</li>
+<li>SQL-based semantic search using <code>pgvector</code></li>
+<li>Evidence-backed answers (anti-hallucination)</li>
+<li>Streamlit UI with source inspection</li>
+</ul>
+
+<hr>
+
+<h2>Tech Stack</h2>
+<ul>
+<li><strong>Python 3.11+</strong></li>
+<li><strong>PostgreSQL 16 + pgvector</strong></li>
+<li><strong>SQLAlchemy 2.0</strong></li>
+<li><strong>SentenceTransformers (MiniLM)</strong></li>
+<li><strong>Llama 3.1 (8B) via Ollama</strong></li>
+<li><strong>Streamlit</strong></li>
+</ul>
+
+<hr>
+
+<h2>Project Structure</h2>
+<pre>
+ai-expert-bot/
+├── data/            # Raw call transcripts (.txt)
+├── backend/         # White-box RAG logic
+├── ui.py            # Streamlit interface
+├── requirements.txt
+└── README.md
+</pre>
+
+<hr>
+
+<h2>How It Works</h2>
+<ol>
+<li><strong>User asks a question</strong></li>
+<li><strong>Question is embedded</strong> into a 384-dimensional vector</li>
+<li><strong>SQL semantic search</strong> via <code>pgvector</code></li>
+<li><strong>Top matching transcript chunks</strong> are retrieved</li>
+<li><strong>LLM generates an answer</strong> only from retrieved sources</li>
+</ol>
+
+<p>Example SQL query:</p>
+<pre><code>SELECT content
+FROM documents
+ORDER BY embedding &lt;=&gt; query_vector
+LIMIT 5;
+</code></pre>
+
+<hr>
+
+<h2>Setup</h2>
+<p>Follow these steps to set up and run the project locally:</p>
+
+<h3>1. Install Python Dependencies</h3>
+<pre><code>pip install -r requirements.txt
+</code></pre>
+
+<h3>2. Initialize PostgreSQL Database</h3>
+<pre><code>python -m backend.setup_db
+</code></pre>
+
+<h3>3. Ingest & Index Data</h3>
+<pre><code>python -m backend.ingest_data
+</code></pre>
+
+<h3>4. Run the Streamlit Interface</h3>
+<pre><code>streamlit run ui.py
+</code></pre>
+
+<p>After completing these steps, the assistant will be ready to answer questions based on your uploaded transcripts.</p>
+
+<hr>
+
+<h2>Use Cases</h2>
+<ul>
+<li>Call center quality audits</li>
+<li>Agent training and coaching</li>
+<li>Procedure and FAQ extraction</li>
+<li>Compliance and script verification</li>
+</ul>
+
+<hr>
+
+<h2>Design Principles</h2>
+<ul>
+<li><strong>Transparency over abstraction</strong></li>
+<li><strong>SQL over hidden retrieval layers</strong></li>
+<li><strong>Local models over cloud APIs</strong></li>
+<li><strong>Evidence over speculation</strong></li>
+</ul>
